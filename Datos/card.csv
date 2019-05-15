@@ -1,0 +1,82 @@
+Apparition,Special,Skill,1,Gain 1 Intangible. Exhaust. Ethereal.
+Bite,Special,Attack,1,Deal7 damage. Heal 2 HP.
+J.A.X,Special,Skill,0,Lost 3 HP. Gain 2 Strenght.
+Ritual Dagger,Special,Attack,1,Deal 15 damage. If this kills an enemy then permanently increase this card's damage by 3.
+Shiv,Special,Attack,0,Deal 4 damage. Exhaust.
+Bandage Up,Uncommon,Skill,0,Heal 4 HP. Exhaust.
+Blind,Uncommon,Skill,0,Apply 2 Weak.
+Dark Shackles,Uncommon,Skill,0,Enemy loses 9 Strength for the rest of this turn.
+Deep Breath,Uncommon,Skill,0,Shuffle your discard pile into your draw pile. Draw 1 card.
+Discovery,Uncommon,Skill,1,Choose 1 of 3 random cards to add to your hand. It costs 0 this turn. Exhaust.
+Dramatic Entrance,Uncommon,Skill,0,Innate. Deal 6 damage to ALL enemies.
+Enlightenment,Uncommon,Skill,0,Reduce the cost of cards in your hand to 1 this turn.
+Finesse,Uncommon,Skill,0,Gain 2 Block. Draw 1 card.
+Flash of Steel,Uncommon,Attack,0,Deal 3 damage. Draw 1 card.
+Forethought,Uncommon,Skill,0,Place a card from your hand on the bottom of your draw pile. It costs 0 until played. 
+Good Instincts,Uncommon,Skill,0,Gain 5 Block
+Impatience,Uncommon,Skill,0,"If you have no Attackcards in your hand, draw 2 cards. "
+Jack Of All Trades,Uncommon,Skill,0,Add 1 random Colorless card to your hand. Exhaust.
+Madness,Uncommon,Skill,1,A random card in your hand costs 0 for the rest of combat. Exhaust.
+Mind Blast,Uncommon,Attack,2,Innate. Deal damage equal to the number of cards in your draw pile.
+Panacea,Uncommon,Skill,0,Gain 1 Artifact. Exhaust.
+Panic Button,Uncommon,Skill,0,Gain 30 Block. You cannot gain Block from cards for the next 2 turns. Exhaust.
+Purity,Uncommon,Skill,0,Choose and exhaust 3 cards in your hand. Exhaust. 
+Swift Strike,Uncommon,Attack,0,Deal 6 damage.
+Trip,Uncommon,Skill,0,Apply 2 Vulnerable.
+Apotheosis,Rare,Skill,2,Upgrade ALL of your cards for the rest of combat. Exhaust.
+Chrysalis,Rare,Skill,2,Add 3 random Skillsinto your Draw Pile. They cost 0 this combat. Exhaust.
+Hand of Greed,Rare,Attack,2," Deal 20 damage. If this kills a non-minion enemy, gain 20 Gold."
+Magnetism,Rare,Skill,2,"At the start of each turn, add a random colorless card to your hand."
+Master of Strategy,Rare,Skill,0,Draw 3 cards. Exhaust.
+Maythem,Rare,Power,2,"At the start of your turn, play the top card of your draw pile. "
+Metamorphosis,Rare,Skill,2,Add 3 random Attacks into your Draw Pile. They cost 0 this combat. Exhaust. 
+Panache,Rare,Power,0,"Every time you play 5 cards in a single turn, deal 10 damage to ALL enemies."
+Sadistic Nature,Rare,Power,0,"Whenever you apply a Debuff to an enemy, they take 3 damage. "
+Secret Technique,Rare,Skill,0,Choose a Skill from your draw pile and place it into your hand. Exhaust. 
+Secret Weapon,Rare,Skill,0,Choose an Attack from your draw pile and place it into your hand. Exhaust.
+The Bomb,Rare,Skill,2,"At the end of 3 turns, deal 30 damage to ALL enemies. "
+Thinking Ahead,Rare,Skill,0,Draw 2 cards. Place a card from your hand on top of your draw pile. Exhaust.
+Transmutation,Rare,Skill,NULL,Add X random  colorless cards into your hand. They cost 0 this turn. Exhaust. 
+Violence,Rare,Skill,0,Place 3 random Attack cards from your draw pile into your hand. Exhaust. 
+Ascender's Bane,NULL,Curse,NULL,Unplayable. Cannot be removed from your deck. Ethereal.
+Clumsy,NULL,Curse,NULL,Unplayable. Ethereal.
+Decay,NULL,Curse,NULL," Unplayable. At the end of your turn, take 2 damage. "
+Doubt,NULL,Curse,NULL," Unplayable. At the end of your turn, gain 1 Weak. "
+Injury,NULL,Curse,NULL,Unplayable. 
+Necronomicurse,NULL,Curse,NULL,Unplayable. There is no escape from this Curse.
+Normality,NULL,Curse,NULL,Unplayable. You cannot play more than 3 cards this turn.
+Panin,NULL,Curse,NULL," Unplayable. While in hand, lose 1 HP when other cards are played. "
+Parasite,NULL,Curse,NULL," Unplayable. If transformed or removed from your deck, lose 3 Max HP. "
+Pride,NULL,Curse,NULL," Unplayable. At the end of your turn, put a copy of this card on top of your draw pile. Exhaust. "
+Regret,NULL,Curse,NULL," Unplayable. At the end of your turn, lose HP equal to the number of cards in your hand. "
+Shame,NULL,Curse,NULL," Unplayable. At the end of your turn, gain 1 Frail. "
+Weithe,NULL,Curse,NULL,Unplayable. Innate.
+Burn,NULL,Status,NULL,
+Dazed,NULL,Status,NULL,Unplayable. Ethereal.
+Wound,NULL,Status,NULL,Unplayable.
+Slimed,NULL,Status,1,Exhaust
+Void,NULL,Status,NULL,"Unplayable. When this card is drawn, lose 1 Energy. Ethereal. "
+Defend,Starter,Skill,1,Gain 5 Block.
+Strike,Starter,Attack,1,Deal 6 damage.
+Bash,Starter,Attack,2,Deal 8 damage. Apply 2 Vulnerable.
+Anger,Common,Attack,0,
+Armaments,Common,Skill,1,
+Body Slam,Common,Attack,1
+Clash,Common,Attack,0
+Cleave,Common,Attack,1
+Clothesline,Common,Attack,2
+Flex,Common,Skill,0
+Havoc,Common,Skill,1
+Headbutt,Common,Attack,1
+Heavy Blade,Common,Attack,2
+Iron Wave,Common,Attack,1
+Perfected Strike,Common,Attack,2
+Pommel Strike,Common,Attack,1
+Shrug it Off,Common,Skill,1
+Sworf Boomerang,Common,Attack,1
+Thunderclap,Common,Attack,1
+True Grit,Common,Skill,1
+Twin Strike,Common,Attack,1
+Warcry,Common,Skill,2
+Wild Strike,Common,Attack,1
+Battle Trance

@@ -15,9 +15,9 @@ drop table if exists card;
 
 create table card(
     nameCard varchar(30) not null,
-    rarityCard varchar(10) not null,
+    rarityCard varchar(10),
     typeCard varchar(10) not null,
-    cost smallint(10) not null,
+    cost smallint(10),
     descriptionCard varchar(150) not null,
 
     primary key(nameCard)
