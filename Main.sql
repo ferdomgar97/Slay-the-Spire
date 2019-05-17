@@ -26,7 +26,7 @@ create table card(
 
 create table heroe(
     nameHeroe varchar(10) not null,
-    hp smallint(5) not null,
+    hp smallint(5),
     descriptionHeroe varchar(100) not null,
 
     primary key(nameHeroe)
@@ -41,8 +41,8 @@ create table relic(
 )ENGINE=InnoDB;
 
 create table earn(
-    earn_nameHeroe varchar(10) not null,
     earn_nameRelic varchar(30) not null,
+    earn_nameHeroe varchar(10) not null,
 
     primary key(earn_nameHeroe, earn_nameRelic),
 
@@ -58,8 +58,8 @@ create table earn(
 )ENGINE=InnoDB;
 
 create table play(
-    play_nameHeroe varchar(10) not null,
     play_nameCard varchar(30) not null,
+    play_nameHeroe varchar(10) not null,
 
     primary key(play_nameHeroe, play_nameCard),
 
