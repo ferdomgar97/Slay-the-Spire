@@ -133,7 +133,7 @@ Insert into card values('Pride','NULL','Curse','0','Unplayable. At the end of yo
 Insert into card values('Regret','NULL','Curse','0','Unplayable. At the end of your turn, lose HP equal to the number of cards in your hand.');
 Insert into card values('Shame','NULL','Curse','0','Unplayable. At the end of your turn, gain 1 Frail.');
 Insert into card values('Weithe','NULL','Curse','0','Unplayable. Innate.');
-Insert into card values('Burn','NULL','Status','0','');
+Insert into card values('Burn','NULL','Status','0','Unplayable.At the end of your turn, take 4 damage.');
 Insert into card values('Dazed','NULL','Status','0','Unplayable. Ethereal.');
 Insert into card values('Wound','NULL','Status','0','Unplayable.');
 Insert into card values('Slimed','NULL','Status','1','Exhaust');
@@ -1033,3 +1033,183 @@ Update card
 Update heroe
     set HP = NULL
     where nameHeroe = 'Everyone';
+
+delimiter $$
+/* Vistas */
+/* Reliquias de cada heroe */
+drop view if exists v_relicHeroe $$
+create view v_relicHeroe as select earn_nameRelic as Relic, earn_nameHeroe as Heroe from earn where earn_nameHeroe not like 'Everyone' $$
+
+/* Cartas iniciales disponibles */
+drop view if exists v_starter $$
+create view v_starter as select * from card where rarityCard like 'Starter' $$
+
+
+/* Procedimientos */
+/* Contar numero de cartas del Heroe */
+drop procedure if exists p_cardsHeroe $$
+create procedure p_cardsHeroe (in par_nameHeroe varchar(10))
+begin
+	select count(*) from play where play_nameHeroe like par_nameHeroe;
+end; $$
+
+
+/* Contar el numero de cartas del tipo */
+drop procedure if exists p_typeCard $$
+create procedure p_typeCard (in par_typeCard varchar(10))
+begin
+	declare par_numTypeCardIro smallint (50);
+	declare par_numTypeCardSil smallint (50);
+    declare par_numTypeCardDef smallint (50);
+    declare par_numTypeCard smallint (50);
+    
+    set par_numTypeCardIro = (select count(*) from card inner join play on nameCard = play_nameCard where play_nameHeroe like 'Ironclad' and typeCard like par_typeCard);
+    set par_numTypeCardSil = (select count(*) from card inner join play on nameCard = play_nameCard where play_nameHeroe like 'Silent' and typeCard like par_typeCard);
+    set par_numTypeCardDef = (select count(*) from card inner join play on nameCard = play_nameCard where play_nameHeroe like 'Defect' and typeCard like par_typeCard);
+    set par_numTypeCard = par_numTypeCardIro + par_numTypeCardSil + par_numTypeCardDef;
+    
+    select par_numTypeCardIro as Ironclad, par_numTypeCardSil as Silent, par_numTypeCardDef as Defect, par_numTypeCard as Total;
+    
+end; $$
+
+
+/* Mostrar las reliquias */
+drop procedure if exists p_relic $$
+create procedure p_relic(in par_typeRelic varchar(10))
+begin
+	select nameRelic, earn_nameHeroe as Heroe from relic inner join earn on nameRelic = earn_nameRelic where rarityRelic like par_typeRelic;
+end; $$
+
+
+/* Eliminar heroe */
+drop procedure if exists p_delHeroe $$
+create procedure p_delHeroe(in par_nameHeroe varchar(10))
+begin
+    delete from card where nameCard in (select play_nameCard from play where play_nameHeroe like par_nameHeroe);
+	delete from relic where nameRelic in (select earn_nameRelic from play where earn_nameHeroe like par_nameHeroe);
+    delete from heroe where nameHeroe like par_nameHeroe;
+end; $$
+
+
+/* Actualizar v_relicheroe */
+drop procedure if exists p_updaterelicheroe $$
+create procedure p_updaterelicheroe()
+begin
+	drop view if exists v_relicHeroe;
+	create view v_relicHeroe as select earn_nameRelic as Relic, earn_nameHeroe as Heroe from earn where earn_nameHeroe not like 'Everyone';
+end; $$
+
+
+/* Funciones */
+
+SET GLOBAL log_bin_trust_function_creators = 1 $$ /* Permisos para crear funciones */
+
+/* Contar numero de Curses */
+drop function if exists f_Curse $$
+create function f_Curse()
+	returns smallint(10)
+begin
+
+	declare par_numCurse smallint(10);
+    
+    set par_numCurse = (select count(*) from card where typeCard like 'Curse');
+    return par_numCurse;
+end; $$
+
+
+/* Contar numero de Status */
+drop function if exists f_Status $$
+create function f_Status()
+	returns smallint(10)
+begin
+
+	declare par_numStatus smallint(10);
+    
+    set par_numStatus = (select count(*) from card where typeCard like 'Status');
+    return par_numStatus;
+end; $$
+
+
+/* Contar numero de cartas cost X */
+drop function if exists f_costX $$
+create function f_costX()
+	returns smallint(10)
+begin
+
+	declare par_numcostX smallint(10);
+    
+    set par_numcostX = (select count(*) from card where descriptionCard like '% X %');
+    return par_numcostX;
+end; $$
+
+
+/* Contar numero de reliquias de la tienda */
+drop function if exists f_relicShop $$
+create function f_relicShop()
+	returns smallint(10)
+begin
+
+	declare par_numrelicShop smallint(10);
+    
+    set par_numrelicShop = (select count(*) from relic where rarityRelic like 'Shop');
+    return par_numrelicShop;
+end; $$
+
+
+/* Probabilidad de que te toque una reliquia que le puede tocar a cualquiera */
+drop function if exists f_probEveryoneRelic $$
+create function f_probEveryoneRelic()
+	returns decimal(2)
+begin
+
+	declare par_probability smallint(2);
+    
+	set par_probability = round(((SELECT count(*) FROM earn where earn_nameHeroe like 'Everyone')/(SELECT count(*) FROM earn))*100);
+    return par_probability;
+end; $$
+
+/* Disparadores */
+/* Seguridad para la tabla heroe */
+drop trigger if exists t_heroe $$
+create trigger t_heroe
+	before delete on heroe for each row
+    if (select count(*) from heroe) = 0 then
+		Insert into heroe values('Ironclad','80','The remaining soldier of the Ironclads. Sold his soul to harness demonic energies.');
+		Insert into heroe values('Silent','70','A deadly huntress from the foglands. Eradicates foes with daggers and poisons.');
+		Insert into heroe values('Defect','75','A combat auromaron which became self-aware. Ancient technology allows the manipulation of Orbs.');
+		Insert into heroe values('Everyone','0','Everyone');
+	end if;
+$$
+
+
+/* Actualizador de la vista v_relicheroe */
+drop trigger if exists t_updaterelic $$
+create trigger t_updaterelicheroe
+	before update on relic for each row
+call p_updaterelicheroe(); 
+$$
+
+
+drop trigger if exists t_updateheroe $$
+create trigger t_updateheroe
+	before update on heroe for each row
+call p_updaterelicheroe(); 
+$$
+
+
+/* Actualizador de earn para nuevas reliquias */
+drop trigger if exists t_earn $$
+create trigger t_earn
+    before insert on relic for each row
+    insert into earn values (new.nameRelic, 'Everyone');
+$$
+
+
+/* Actualizador de play para nuevas cartas */
+drop trigger if exists t_play $$
+create trigger t_play
+    before insert on card for each row
+    insert into play values (new.nameCard, 'Everyone');
+$$
+
+delimiter ;
